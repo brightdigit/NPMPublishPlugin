@@ -152,7 +152,7 @@ jobs:
             ATTEMPT=$(($ATTEMPT+1))
           done
       - name: Run iOS target tests
-        run: xcodebuild test -scheme NPMPublishPlugin-Package -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
+        run: xcodebuild test -scheme NPMPublishPlugin -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
       - uses: sersoft-gmbh/swift-coverage-action@v3
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
@@ -166,7 +166,7 @@ jobs:
           flags: iOS,iOS-${{ matrix.iOSVersion }}
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Run watchOS target tests
-        run: xcodebuild build -scheme NPMPublishPlugin-Package -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}'
+        run: xcodebuild build -scheme NPMPublishPlugin -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}'
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
       - uses: sersoft-gmbh/swift-coverage-action@v3
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')

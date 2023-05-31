@@ -1,12 +1,8 @@
-import XCTest
 @testable import NPMPublishPlugin
+import XCTest
 
-final class NPMPublishPluginTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documenation
-        // https://developer.apple.com/documentation/xctest
-
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
-    }
+internal final class NPMPublishPluginTests: XCTestCase {
+  internal func testExample() throws {
+    XCTAssert(true)
+  }
 }
