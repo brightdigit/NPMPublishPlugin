@@ -15,7 +15,6 @@ public extension PublishingStep {
       for command in commands {
         try shellOut(to: command, at: folderPath)
       }
-
     })
   }
 

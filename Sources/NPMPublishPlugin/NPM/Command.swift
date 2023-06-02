@@ -14,6 +14,7 @@ public extension NPM {
 
     let string: String
 
+    // swiftlint:disable:next identifier_name
     public static let ci: Self = .init("ci")
     public static let run: Self = .init("run")
   }

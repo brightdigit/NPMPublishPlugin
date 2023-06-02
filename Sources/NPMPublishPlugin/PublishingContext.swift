@@ -8,6 +8,7 @@ extension PublishingContext: NPMContext {
     switch path.type {
     case .file:
       return try self.createOutputFile(at: path.path)
+
     case .folder:
       return try self.createOutputFolder(at: path.path)
     }

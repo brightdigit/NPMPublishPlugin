@@ -4,6 +4,7 @@ import ShellOut
 
 public extension NPM {
   enum Argument: ExpressibleByStringLiteral {
+    // swiftlint:disable:next nesting
     public typealias StringLiteralType = String
 
     case string(String)
