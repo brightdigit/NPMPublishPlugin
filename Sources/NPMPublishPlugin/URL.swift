@@ -6,6 +6,7 @@ import ShellOut
   import FoundationNetworking
 #endif
 extension URL {
+  // swiftlint:disable:next explicit_acl
   func relativePath(from base: URL) -> String? {
     // Ensure that both URLs represent files:
     guard isFileURL, base.isFileURL else {

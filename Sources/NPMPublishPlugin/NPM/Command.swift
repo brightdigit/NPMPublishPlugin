@@ -12,7 +12,7 @@ public extension NPM {
       string = value
     }
 
-    let string: String
+    public let string: String
 
     // swiftlint:disable:next identifier_name
     public static let ci: Self = .init("ci")
