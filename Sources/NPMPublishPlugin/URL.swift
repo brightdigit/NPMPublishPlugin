@@ -2,7 +2,6 @@ import Foundation
 import Publish
 import ShellOut
 
-// swiftlint:disable explicit_acl
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
@@ -11,7 +10,7 @@ extension URL {
   ///
   /// - Parameter base: The base URL from which to build the relative path.
   /// - Returns: A relative path from this URL to the given base URL, or `nil` if the two URLs are not related.
-  func relativePath(from base: URL) -> String? {
+  internal func relativePath(from base: URL) -> String? {
     // Ensure that both URLs represent files:
     guard isFileURL, base.isFileURL else {
       return nil
@@ -31,5 +30,3 @@ extension URL {
     return relComponents.joined(separator: "/")
   }
 }
-
-// swiftlint:enable explicit_acl

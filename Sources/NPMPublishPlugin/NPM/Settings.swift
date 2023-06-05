@@ -3,7 +3,6 @@ import Foundation
 import Publish
 import ShellOut
 
-// swiftlint:disable explicit_acl
 // swiftlint:disable function_default_parameter_at_end
 public extension NPM {
   /// An enum listing each representing the location of npm project.
@@ -46,16 +45,16 @@ public extension NPM {
     }
 
     /// The custom path to the npm executable.
-    let npmPath: String
+    public let npmPath: String
 
     /// The location of the npm project.
-    let location: Location
+    public let location: Location
 
     /// Gets the folder that contains the npm project.
     ///
     /// - Parameter context: The context that will be used to resolve the folder.
     /// - Returns: The folder that contains the npm project.
-    func folder(usingContext context: Context) throws -> Files.Folder {
+    internal func folder(usingContext context: Context) throws -> Files.Folder {
       switch self.location {
       case let .folder(folder):
         return folder
@@ -67,5 +66,4 @@ public extension NPM {
   }
 }
 
-// swiftlint:enable explicit_acl
 // swiftlint:enable function_default_parameter_at_end
