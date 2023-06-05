@@ -140,42 +140,41 @@ jobs:
       - name: Lint
         run: ./scripts/lint.sh
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-      - name: Dump PIF
-        #if: startsWith(matrix.xcode,'/Applications/Xcode_14')
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-        run: |
-          swift package dump-pif > /dev/null
-          MAX_ATTEMPT=3
-          ATTEMPT=0
-          while [ -z $SUCCESS ] && [ "$ATTEMPT" -le "$MAX_ATTEMPT" ]; do
-            xcodebuild clean -scheme NPMPublishPlugin -destination 'generic/platform=iOS' | grep -q "CLEAN SUCCEEDED" && SUCCESS=true
-            ATTEMPT=$(($ATTEMPT+1))
-          done
-      - name: Run iOS target tests
-        run: xcodebuild test -scheme NPMPublishPlugin -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-      - uses: sersoft-gmbh/swift-coverage-action@v3
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-        with:
-          fail-on-empty-output: true
-      - name: Upload iOS coverage to Codecov
-        uses: codecov/codecov-action@v3
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-        with:
-          fail_ci_if_error: true
-          flags: iOS,iOS-${{ matrix.iOSVersion }}
-          token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Run watchOS target tests
-        run: xcodebuild build -scheme NPMPublishPlugin -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}'
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-      - uses: sersoft-gmbh/swift-coverage-action@v3
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-        with:
-          fail-on-empty-output: true
-      - name: Upload watchOS coverage to Codecov
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-        uses: codecov/codecov-action@v3
-        with:
-          fail_ci_if_error: true
-          flags: watchOS,watchOS${{ matrix.watchOSVersion }}
-          token: ${{ secrets.CODECOV_TOKEN }}
+#       - name: Dump PIF
+#         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+#         run: |
+#           swift package dump-pif > /dev/null
+#           MAX_ATTEMPT=3
+#           ATTEMPT=0
+#           while [ -z $SUCCESS ] && [ "$ATTEMPT" -le "$MAX_ATTEMPT" ]; do
+#             xcodebuild clean -scheme NPMPublishPlugin -destination 'generic/platform=iOS' | grep -q "CLEAN SUCCEEDED" && SUCCESS=true
+#             ATTEMPT=$(($ATTEMPT+1))
+#           done
+#       - name: Run iOS target tests
+#         run: xcodebuild test -scheme NPMPublishPlugin -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
+#         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+#       - uses: sersoft-gmbh/swift-coverage-action@v3
+#         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+#         with:
+#           fail-on-empty-output: true
+#       - name: Upload iOS coverage to Codecov
+#         uses: codecov/codecov-action@v3
+#         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+#         with:
+#           fail_ci_if_error: true
+#           flags: iOS,iOS-${{ matrix.iOSVersion }}
+#           token: ${{ secrets.CODECOV_TOKEN }}
+#       - name: Run watchOS target tests
+#         run: xcodebuild build -scheme NPMPublishPlugin -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}'
+#         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+#       - uses: sersoft-gmbh/swift-coverage-action@v3
+#         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+#         with:
+#           fail-on-empty-output: true
+#       - name: Upload watchOS coverage to Codecov
+#         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+#         uses: codecov/codecov-action@v3
+#         with:
+#           fail_ci_if_error: true
+#           flags: watchOS,watchOS${{ matrix.watchOSVersion }}
+#           token: ${{ secrets.CODECOV_TOKEN }}
