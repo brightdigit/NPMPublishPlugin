@@ -21,7 +21,7 @@ public extension NPM {
     /// - Parameters:
     ///   - npmPath: The custom path to the npm executable.
     ///   - location: The path/folder location of the npm project.
-    init(npmPath: String? = nil, location: Location) {
+    public init(npmPath: String? = nil, location: Location) {
       self.npmPath = npmPath ?? "npm"
       self.location = location
     }

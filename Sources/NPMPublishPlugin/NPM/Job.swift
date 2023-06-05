@@ -9,7 +9,7 @@ public extension NPM {
     ///
     /// - Parameters:
     ///   - subcommand: The npm command.
-    ///   - outputRelativePaths: Any output paths required for npm command to finish its job.
+    ///   - outputRelativePaths: Any output paths required by npm.
     ///   - arguments: Any additional arguments to pass to the npm command.
     public init(
       subcommand: Command,
@@ -25,8 +25,8 @@ public extension NPM {
     ///
     /// - Parameters:
     ///   - subcommand: The npm command.
-    ///   - outputRelativePaths: Any output paths required for npm command to finish its job.
-    ///   - argBuilder: A builder for any additional of arguments to pass to the npm command.
+    ///   - outputRelativePaths: Any output paths required by npm.
+    ///   - argBuilder: Arguments to pass to the npm command.
     public init(
       subcommand: Command,
       outputRelativePaths: [OutputPath] = [],
@@ -54,12 +54,12 @@ public func ci() -> NPM.Job {
   .init(subcommand: .ci)
 }
 
-/// This helper function creates an `NPM.Job` instance for the `npm run <arguments>` command.
+/// This helper function creates an ``NPM/Job`.
 ///
 /// - Parameters:
 ///   - paths: The output paths required for npm command to finish its job.
 ///   - argBuilder: A builder for any additional of arguments to pass to the npm command.
-/// - Returns: An `NPM.Job` instance for the `run` command with the given arguments and paths.
+/// - Returns: An ``NPM/Job`` instance for the `run` command.
 public func run(
   paths: [OutputPath] = [],
   @NPM.ArgumentBuilder _ arguments: () -> [NPM.Argument]

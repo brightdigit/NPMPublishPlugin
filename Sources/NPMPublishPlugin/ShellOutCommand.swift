@@ -8,10 +8,11 @@ public extension ShellOutCommand {
   /// This creates a `ShellOutCommand` that represents npm expression to execute.
   ///
   ///  - Parameters:
-  ///    - job: This is the npm command to execute, passed with any arguments, and output paths.
-  ///    - settings: Any settings required for npm job to run like npm executable path, project location, etc.
+  ///    - job: This is the npm command to execute.
+  ///    - settings: Any settings required for npm job.
   ///    - context: The context in which to run the NPM job.
-  ///  - Throws: An error if the project folder cannot be retrieved or output paths cannot be created.
+  ///  - Throws: An error if the project folder cannot be retrieved or
+  ///  output paths cannot be created.
   ///  - Returns: The resulting `ShellOutCommand`.
   static func npm(
     _ job: NPM.Job,
@@ -41,7 +42,7 @@ public extension ShellOutCommand {
       }
     }
 
-    // Build ShellOutCommand from the string representation of npm command and its arguments.
+    // Build `ShellOutCommand` from the string representation.
     let arguments = argumentsArray.joined(separator: " ")
     let npmPath = settings.npmPath
     let subcommandString = job.subcommand.string

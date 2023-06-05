@@ -10,7 +10,7 @@ public extension PublishingStep {
   /// - Parameters:
   ///   - jobs: A builder to create a list of one or more npm jobs to run.
   ///   - settings: The npm settings to use.
-  ///   - Returns: A `PublishingStep` that runs the specified npm jobs with the provided settings.
+  ///   - Returns: A `PublishingStep` that runs the specified npm jobs.
   static func npm(run jobs: [NPM.Job], withSettings settings: NPM.Settings) -> Self {
     .step(named: "Running npm Job...") { context in
       let folderPath = try settings.folder(usingContext: context).path
