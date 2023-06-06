@@ -10,7 +10,7 @@ This is the overview
 
 **Apple Platforms**
 
-- Xcode 13.4 or later
+- Xcode 14.3 or later
 - Swift 5.8 or later
 
 // @Leo
