@@ -41,7 +41,7 @@ let package = Package(
       ...
       dependencies: [
           ...
-          .product(name: "Publish", package: "publish"),
+          .product(name: "NPMPublishPlugin", package: "NPMPublishPlugin"),
       ]
     )
   ]
