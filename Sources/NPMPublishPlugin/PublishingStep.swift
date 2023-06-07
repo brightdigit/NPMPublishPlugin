@@ -3,7 +3,6 @@ import Foundation
 import Publish
 import ShellOut
 
-// swiftlint:disable function_default_parameter_at_end
 public extension PublishingStep {
   /// Runs the specified NPM jobs with the given settings.
   ///
@@ -34,7 +33,7 @@ public extension PublishingStep {
   static func npm(
     _ npmPath: String? = nil,
     at folder: Folder = .current,
-    @NPM.JobBuilder _ jobs: () -> [NPM.Job]
+    @NPM.JobBuilder _ jobs: () -> [NPM.Job] = { [] }
   ) -> Self {
     Self.npm(
       run: jobs(),
@@ -51,8 +50,8 @@ public extension PublishingStep {
   /// - Returns: A `PublishingStep` that represents the npm job.
   static func npm(
     _ npmPath: String? = nil,
-    at relativePath: Path,
-    @NPM.JobBuilder _ jobs: () -> [NPM.Job]
+    at relativePath: Path = ".",
+    @NPM.JobBuilder _ jobs: () -> [NPM.Job] = { [] }
   ) -> Self {
     Self.npm(
       run: jobs(),
@@ -60,5 +59,3 @@ public extension PublishingStep {
     )
   }
 }
-
-// swiftlint:enable function_default_parameter_at_end

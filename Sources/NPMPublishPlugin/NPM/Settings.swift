@@ -3,7 +3,6 @@ import Foundation
 import Publish
 import ShellOut
 
-// swiftlint:disable function_default_parameter_at_end
 public extension NPM {
   /// An enum listing each representing the location of npm project.
   enum Location {
@@ -21,7 +20,7 @@ public extension NPM {
     /// - Parameters:
     ///   - npmPath: The custom path to the npm executable.
     ///   - location: The path/folder location of the npm project.
-    public init(npmPath: String? = nil, location: Location) {
+    public init(npmPath: String? = nil, location: Location = .folder(Folder.current)) {
       self.npmPath = npmPath ?? "npm"
       self.location = location
     }
@@ -31,7 +30,7 @@ public extension NPM {
     /// - Parameters:
     ///   - npmPath: The custom path to the npm executable.
     ///   - folder: The folder location of the npm project.
-    public init(npmPath: String? = nil, folder: Files.Folder) {
+    public init(npmPath: String? = nil, folder: Files.Folder = .current) {
       self.init(npmPath: npmPath, location: .folder(folder))
     }
 
@@ -40,7 +39,7 @@ public extension NPM {
     /// - Parameters:
     ///   - npmPath: The custom path to the npm executable.
     ///   - path: The path location to the npm project.
-    public init(npmPath: String? = nil, path: Path) {
+    public init(npmPath: String? = nil, path: Path = Path(".")) {
       self.init(npmPath: npmPath, location: .path(path))
     }
 
@@ -65,5 +64,3 @@ public extension NPM {
     }
   }
 }
-
-// swiftlint:enable function_default_parameter_at_end

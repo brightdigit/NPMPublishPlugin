@@ -2,7 +2,6 @@ import Foundation
 import Publish
 import ShellOut
 
-// swiftlint:disable identifier_name
 public extension NPM {
   /// A type that represents npm command.
   struct Command: ExpressibleByStringLiteral {
@@ -26,11 +25,10 @@ public extension NPM {
     // MARK: Predefined Commands
 
     /// The `ci` npm command.
+    // swiftlint:disable:next identifier_name
     public static let ci: Self = .init("ci")
 
     /// The `run` npm command.
     public static let run: Self = .init("run")
   }
 }
-
-// swiftlint:enable identifier_name
