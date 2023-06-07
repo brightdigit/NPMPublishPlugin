@@ -127,13 +127,14 @@ jobs:
       - name: Run Swift Package tests
         run: swift test -v --enable-code-coverage
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-      - uses: sersoft-gmbh/swift-coverage-action@v2
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+      - uses: sersoft-gmbh/swift-coverage-action@v3
+        id: coverage-files
       - name: Upload SPM coverage to Codecov
         uses: codecov/codecov-action@v2
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
         with:
           fail_ci_if_error: true
+          files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
           flags: spm
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
