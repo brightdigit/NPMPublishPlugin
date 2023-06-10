@@ -1,7 +1,7 @@
-import XCTest
-import Publish
 import struct Files.Folder
 @testable import NPMPublishPlugin
+import Publish
+import XCTest
 
 internal final class OutputPathTests: XCTestCase {
   internal func testFile() {

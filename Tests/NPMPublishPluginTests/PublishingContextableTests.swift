@@ -1,6 +1,6 @@
-import XCTest
-import Publish
 @testable import NPMPublishPlugin
+import Publish
+import XCTest
 
 internal final class PublishingContextableTests: XCTestCase {
   internal func testCreateOutputWithFile() throws {

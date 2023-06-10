@@ -1,9 +1,7 @@
-import XCTest
 @testable import NPMPublishPlugin
+import XCTest
 
 internal final class URLTests: XCTestCase {
-  internal func testRelativePath() throws {
-//    URL()?.relativePath(from: <#T##URL#>)
-//    XCTFail("Missing Implementation for " + #function)
-  }
+//  internal func testRelativePath() throws {
+//  }
 }
