@@ -5,15 +5,15 @@ import Publish
 import ShellOut
 
 public protocol PublishingContextable: NPMContext {
-  /// Create a folder at a given path within the website's output folder.
-  /// - parameter path: The path to create a folder at.
-  /// - throws: An error in case the folder couldn't be created.
-  func createOutputFolder(at path: Path) throws -> Folder
-
   /// Create a file at a given path within the website's output folder.
   /// - parameter path: The path to create a file at.
   /// - throws: An error in case the file couldn't be created.
   func createOutputFile(at path: Path) throws -> File
+
+  /// Create a folder at a given path within the website's output folder.
+  /// - parameter path: The path to create a folder at.
+  /// - throws: An error in case the folder couldn't be created.
+  func createOutputFolder(at path: Path) throws -> Folder
 }
 
 public extension PublishingContextable {

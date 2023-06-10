@@ -4,4 +4,6 @@ import Foundation
 import Publish
 import ShellOut
 
-extension PublishingContext: PublishingContextable {}
+extension PublishingContext: PublishingContextable {
+  
+}

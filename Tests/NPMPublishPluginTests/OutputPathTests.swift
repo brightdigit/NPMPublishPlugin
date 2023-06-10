@@ -1,11 +1,9 @@
 import XCTest
 import Publish
 import struct Files.Folder
-
 @testable import NPMPublishPlugin
 
 internal final class OutputPathTests: XCTestCase {
-  
   internal func testFile() {
     let outputPath: OutputPath = .init(
       path: .init(temporaryFolder.path),

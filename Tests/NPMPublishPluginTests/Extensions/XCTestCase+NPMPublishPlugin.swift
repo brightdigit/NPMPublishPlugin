@@ -1,4 +1,5 @@
 import XCTest
+import struct Files.File
 import struct Files.Folder
 
 @testable import NPMPublishPlugin
