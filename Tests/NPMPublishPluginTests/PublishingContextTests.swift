@@ -1,11 +1,18 @@
+import Files
+import NPMPublishPlugin
+import Publish
 import XCTest
 
-internal final class PublishingContextTests: XCTestCase {
-  internal func testCreateOutputWithFile() {
-    XCTFail("Missing Implementation for " + #function)
+internal final class PublishingContextableTests: XCTestCase {
+  internal func testCreateOutputWithFile() throws {
+    let mock = MockPublishingContextable()
+    let actualFilePath = Path(UUID().uuidString)
+    _ = try mock.createOutput(for: .file(actualFilePath))
+
+    XCTAssertEqual(mock.outputPathFilePassed, actualFilePath)
   }
 
-  internal func testCreateOutputWitholder() {
+  internal func testCreateOutputWitholder() throws {
     XCTFail("Missing Implementation for " + #function)
   }
 }
