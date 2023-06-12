@@ -2,8 +2,8 @@ import struct Files.Folder
 import Foundation
 import Publish
 
-/// A protocol that defines an NPM context.
-public protocol NPMContext {
+/// A protocol that defines an **npm** context.
+internal protocol NPMContext {
   /// Creates an output file or folder at the given path.
   ///
   /// - Parameter path: The path to the output file or folder.
@@ -17,7 +17,7 @@ public protocol NPMContext {
   func folder(at path: Path) throws -> Folder
 }
 
-public extension NPM {
-  /// A context type as part of NPM namespace
-  typealias Context = NPMContext
+extension NPM {
+  /// A context type as part of **npm** namespace
+  internal typealias Context = NPMContext
 }

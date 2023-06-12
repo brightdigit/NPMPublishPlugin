@@ -12,7 +12,7 @@ internal final class ShellOutCommandTests: XCTestCase {
       .init(subcommand: .init("init")) {
         .init(stringLiteral: "--yes")
       },
-      withSettings: NPMSettings(location: .folder(Folder.current)),
+      withSettings: NPM.Settings(location: .folder(Folder.current)),
       andContext: MockPublishingContextable()
     )
 

@@ -1,10 +1,10 @@
 # ``NPMPublishPlugin``
 
-A Publish plugin that makes it easy to run npm commands for any Publish website. 
+A Publish plugin that makes it easy to run **npm** commands for any Publish website. 
 
 ## Overview
 
-This is the overview
+`NPMPublishPlugin` allows you to integrate an NPM package into your **Publish** site. If you require javascript or css to be built for your site, this is the ideal plugin for you.
 
 ### Requirements 
 
@@ -13,12 +13,10 @@ This is the overview
 - Xcode 14.3 or later
 - Swift 5.8 or later
 
-// @Leo
-- iOS 14 / watchOS 6 / tvOS 14 / macOS 12 or later deployment targets
+- macOS 12 or later deployment targets
 
 **Linux**
 
-// @Leo
 - Ubuntu 18.04 or later
 - Swift 5.8 or late
 
@@ -32,6 +30,10 @@ let package = Package(
   dependencies: [
       ...
       .package(
+         url: "https://github.com/johnsundell/publish.git", 
+         from: "0.9.0"
+      ),
+      .package(
         url: "https://github.com/brightdigit/NPMPublishPlugin.git",
         from: "1.0.0"
       )
@@ -41,6 +43,7 @@ let package = Package(
       ...
       dependencies: [
           ...
+          .product(name: "Publish", package: "publish"),
           .product(name: "NPMPublishPlugin", package: "NPMPublishPlugin"),
       ]
     )
@@ -57,7 +60,47 @@ import NPMPublishPlugin
 
 ### Usage
 
-**NPMPublishPlugin** enables .....
+Add the `npm` to your **Publish** steps:
+
+```swift
+import NPMPublishPlugin
+
+let mainJS = OutputPath.file("js/main.js")
+
+try DeliciousRecipes().publish(using: [
+    .addMarkdownFiles(),
+    .copyResources(),
+    .addFavoriteItems(),
+    .addDefaultSectionTitles(),
+    .generateHTML(withTheme: .delicious),
+    .generateRSSFeed(including: [.recipes]),
+    .generateSiteMap(),
+    // from the **npm** package directory at `Styling`
+    .npm(npmPath, at: "Styling") {
+      // run `npm ci`
+      ci()
+      // run `npm run publish -- --output-filename js/main.js`
+      run(paths: [mainJS]) {
+        "publish -- --output-filename"
+        mainJS
+      }
+    }
+])
+```
 
 ## Topics
+
+### Setting up your Publish step
+
+* ``Publish/PublishingStep``
+* ``NPM/Job``
+* ``NPM/Settings``
+* ``OutputPath``
+* ``NPM/Argument``
+* ``NPM``
+
+### Commands
+
+* ``ci()``
+* ``run(paths:_:)``
 
