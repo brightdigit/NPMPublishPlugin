@@ -2,7 +2,7 @@
 
 A Publish plugin that makes it easy to run **npm** commands for any Publish website.
 
-[![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-success?logo=swift)](https://swift.org)
+[![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20macOS-success?logo=swift)](https://swift.org)
 [![Twitter](https://img.shields.io/badge/twitter-@brightdigit-blue.svg?style=flat)](http://twitter.com/brightdigit)
 ![GitHub](https://img.shields.io/github/license/brightdigit/NPMPublishPlugin)
 ![GitHub issues](https://img.shields.io/github/issues/brightdigit/NPMPublishPlugin)
@@ -26,6 +26,9 @@ A Publish plugin that makes it easy to run **npm** commands for any Publish webs
    * [Requirements](#requirements)
    * [Installation](#installation)
 * [Usage](#usage)
+   * [Configuring npm](#configuring-npm)
+   * [Running npm commands](#running-npm-commands)
+   * [On Argument](#on-argument)
 * [References](#references)
 * [License](#license)
 
