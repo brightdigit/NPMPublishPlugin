@@ -14,7 +14,7 @@ A Publish plugin that makes it easy to run **npm** commands for any Publish webs
 
 [![Codecov](https://img.shields.io/codecov/c/github/brightdigit/NPMPublishPlugin)](https://codecov.io/gh/brightdigit/NPMPublishPlugin)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/brightdigit/NPMPublishPlugin)](https://www.codefactor.io/repository/github/brightdigit/NPMPublishPlugin)
-[![codebeat badge](https://codebeat.co/badges/54695d4b-98c8-4f0f-855e-215500163094)](https://codebeat.co/projects/github-com-brightdigit-NPMPublishPlugin-main)
+[![codebeat badge](https://codebeat.co/badges/508ff110-90aa-4a3d-be48-1ffcc8009dd1)](https://codebeat.co/projects/github-com-brightdigit-npmpublishplugin-main)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/brightdigit/NPMPublishPlugin)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
 [![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/brightdigit/NPMPublishPlugin?label=debt)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
 [![Code Climate issues](https://img.shields.io/codeclimate/issues/brightdigit/NPMPublishPlugin)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
