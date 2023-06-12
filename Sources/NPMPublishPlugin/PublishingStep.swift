@@ -8,13 +8,13 @@ import ShellOut
 /// `NPMPublishPlugin` includes three ways to create a **Publish** step to run **npm**.
 /// Firstly, you can suppy a ``NPM/Settings`` and an array of ``NPM/Job`` items.
 ///
-/// Hoever most likely  you'll want to to use the other two methods which you can pass:
+/// However most likely  you'll want to to use the other two methods which you can pass:
 ///
-/// * an opational path to the **npm** command
+/// * an optional path to the **npm** command
 /// * an optional path to the *current directory* to run from
 ///  as either a `Folder` or `Path ` object from **Publish**
 /// * using the ``NPM/JobBuilder`` pass the series jobs
-///  similar to how **SwiftUI** builds `View`s using its DSL
+///  similar to how **SwiftUI** builds a `View` using its DSL
 extension PublishingStep {
   /// Runs the specified **npm** jobs with the given settings.
   ///

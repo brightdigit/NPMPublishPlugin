@@ -60,6 +60,8 @@ import NPMPublishPlugin
 
 ### Usage
 
+Add the `npm` to your **Publish** steps:
+
 ```swift
 import NPMPublishPlugin
 
