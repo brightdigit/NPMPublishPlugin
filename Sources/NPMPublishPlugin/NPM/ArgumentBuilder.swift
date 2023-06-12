@@ -2,10 +2,10 @@ import Foundation
 import Publish
 import ShellOut
 
-public extension NPM {
-  /// A result builder for building a list of one or more npm `Argument`s.
+extension NPM {
+  /// A result builder for building a list of one or more **npm** `Argument`s.
   @resultBuilder
-  enum ArgumentBuilder {
+  public enum ArgumentBuilder {
     /// Builds argument list from a single `Argument`.
     ///
     /// - Parameter expression: A single argument to be built.

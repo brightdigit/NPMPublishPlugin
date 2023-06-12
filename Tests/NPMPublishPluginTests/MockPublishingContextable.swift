@@ -1,5 +1,5 @@
 import Files
-import NPMPublishPlugin
+@testable import NPMPublishPlugin
 import Publish
 import XCTest
 

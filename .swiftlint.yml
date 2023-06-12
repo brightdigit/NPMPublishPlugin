@@ -98,11 +98,14 @@ opt_in_rules:
   - xct_specific_matcher
   - yoda_condition
 cyclomatic_complexity:
+  - 4
   - 6
-  - 9
-file_length:
+type_body_length:
+  - 100
   - 200
-  - 550
+file_length:
+  - 125
+  - 200
 function_body_length:
   - 15
   - 25
@@ -114,9 +117,7 @@ identifier_name:
   excluded:
     - id
 excluded:
-  - Tests/*/XCTestManifests.swift
   - DerivedData
   - .build
-  - Tests/LinuxMain.swift
 indentation_width:
   indentation_width: 2
