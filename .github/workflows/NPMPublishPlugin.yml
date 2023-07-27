@@ -137,6 +137,7 @@ jobs:
           files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
           flags: spm
           verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Lint
         run: ./scripts/lint.sh
         if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
