@@ -13,10 +13,7 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(
-      url: "https://github.com/johnsundell/publish.git",
-      from: "0.9.0"
-    ),
+    .package(path: "../../Publish/Publish"),
     .package(
       url: "https://github.com/johnsundell/shellout.git",
       from: "2.3.0"
@@ -26,7 +23,7 @@ let package = Package(
     .target(
       name: "NPMPublishPlugin",
       dependencies: [
-        .product(name: "Publish", package: "publish"),
+        .product(name: "Publish", package: "Publish"),
         .product(name: "ShellOut", package: "shellout")
       ]
     ),
