@@ -3,9 +3,9 @@ import Publish
 import ShellOut
 
 /// A wrapper type holding the path and the type for output file/folder.
-public struct OutputPath: Equatable, Hashable {
+public struct OutputPath: Equatable, Hashable, Sendable {
   /// An enum representing the type of output path.
-  public enum OutputType {
+  public enum OutputType: Sendable {
     case file
     case folder
   }
