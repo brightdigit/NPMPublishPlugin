@@ -1,8 +1,10 @@
-import struct Files.Folder
-@testable import NPMPublishPlugin
 import Publish
 import ShellOut
 import XCTest
+
+import struct Files.Folder
+
+@testable import NPMPublishPlugin
 
 internal final class ShellOutCommandTests: XCTestCase {
   internal func testNPM() throws {

@@ -1,12 +1,48 @@
-import struct Files.Folder
+//
+//  Settings.swift
+//  NPMPublishPlugin
+//
+//  Created by Leo Dion.
+//  Copyright © 2026 BrightDigit.
+//
+//  Permission is hereby granted, free of charge, to any person
+//  obtaining a copy of this software and associated documentation
+//  files (the "Software"), to deal in the Software without
+//  restriction, including without limitation the rights to use,
+//  copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the
+//  Software is furnished to do so, subject to the following
+//  conditions:
+//
+//  The above copyright notice and this permission notice shall be
+//  included in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+//  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+//  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+//  OTHER DEALINGS IN THE SOFTWARE.
+//
+
 import Foundation
 import Publish
 import ShellOut
+
+import struct Files.Folder
 
 extension NPM {
   /// A type that represents the path  of **npm** command
   ///  and directory to run the command from.
   public struct Settings {
+    /// The custom path to the **npm** executable.
+    public let npmPath: String
+
+    /// The location of the **npm** project.
+    public let location: Location
+
     /// Initializes a `Settings` instance with a custom **npm** path and project location.
     ///
     /// - Parameters:
@@ -35,22 +71,16 @@ extension NPM {
       self.init(npmPath: npmPath, location: .path(path))
     }
 
-    /// The custom path to the **npm** executable.
-    public let npmPath: String
-
-    /// The location of the **npm** project.
-    public let location: Location
-
     /// Gets the folder that contains the **npm** project.
     ///
     /// - Parameter context: The context that will be used to resolve the folder.
     /// - Returns: The folder that contains the **npm** project.
     internal func folder(usingContext context: Context) throws -> Files.Folder {
       switch self.location {
-      case let .folder(folder):
+      case .folder(let folder):
         return folder
 
-      case let .path(path):
+      case .path(let path):
         return try context.folder(at: path)
       }
     }
