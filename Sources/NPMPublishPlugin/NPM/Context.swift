@@ -38,12 +38,14 @@ internal protocol NPMContext {
   ///
   /// - Parameter path: The path to the output file or folder.
   /// - Returns: The output file or folder.
+  /// - Throws: An error in case the file or folder couldn't be created.
   func createOutput(for path: OutputPath) throws -> Output
 
   /// Gets the folder at the given path.
   ///
   /// - Parameter path: The path to the folder.
   /// - Returns: The folder.
+  /// - Throws: An error in case the folder couldn't be found.
   func folder(at path: Path) throws -> Folder
 }
 

@@ -49,9 +49,9 @@ extension PublishingStep {
   /// Runs the specified **npm** jobs with the given settings.
   ///
   /// - Parameters:
-  ///   - jobs: A builder to create a list of one or more **npm** jobs to run.
+  ///   - jobs: The list of one or more **npm** jobs to run.
   ///   - settings: The **npm** settings to use.
-  ///   - Returns: A `PublishingStep` that runs the specified **npm** jobs.
+  /// - Returns: A `PublishingStep` that runs the specified **npm** jobs.
   public static func npm(
     run jobs: [NPM.Job],
     withSettings settings: NPM.Settings

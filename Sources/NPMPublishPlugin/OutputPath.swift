@@ -48,6 +48,7 @@ public struct OutputPath: Equatable, Hashable, Sendable {
   /// Creates an `OutputPath` instance that represents a file with the given path.
   ///
   /// - Parameter path: The path to the output file.
+  /// - Returns: An `OutputPath` for a file at the given path.
   public static func file(_ path: Path) -> Self {
     .init(path: path, type: .file)
   }
@@ -55,6 +56,7 @@ public struct OutputPath: Equatable, Hashable, Sendable {
   /// Creates an `OutputPath` instance that represents a folder with the given path.
   ///
   /// - Parameter path: The path to the output folder.
+  /// - Returns: An `OutputPath` for a folder at the given path.
   public static func folder(_ path: Path) -> Self {
     .init(path: path, type: .folder)
   }

@@ -82,9 +82,10 @@ extension NPM.Job {
   /// Creates the output files and folder and
   ///  returns a `Dictionary` of the ``OutputPath`` and the resulting relative path.
   /// - Parameters:
-  ///   - context: `PublishingContext` from **Publish**
+  ///   - context: The **npm** context used to create the output files and folders.
   ///   - folder: `Folder` from which to return the relative paths to.
   /// - Returns: `Dictionary` of the ``OutputPath`` and the resulting relative path.
+  /// - Throws: An error in case an output file or folder couldn't be created.
   internal func createOutput(
     using context: NPM.Context,
     relativeTo folder: Files.Folder
@@ -108,7 +109,7 @@ public func ci() -> NPM.Job {
 ///
 /// - Parameters:
 ///   - paths: The output paths required for **npm** command to finish its job.
-///   - argBuilder: A builder for any additional of arguments
+///   - arguments: A builder for any additional arguments
 ///    to pass to the **npm** command.
 /// - Returns: An ``NPM/Job`` instance for the `run` command.
 public func run(

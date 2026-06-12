@@ -75,6 +75,7 @@ extension NPM {
     ///
     /// - Parameter context: The context that will be used to resolve the folder.
     /// - Returns: The folder that contains the **npm** project.
+    /// - Throws: An error in case the folder couldn't be resolved from the path.
     internal func folder(usingContext context: Context) throws -> Files.Folder {
       switch self.location {
       case .folder(let folder):
