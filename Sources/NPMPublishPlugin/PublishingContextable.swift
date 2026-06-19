@@ -29,7 +29,6 @@
 
 import Foundation
 import Publish
-import ShellOut
 
 import struct Files.File
 import struct Files.Folder

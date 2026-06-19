@@ -29,7 +29,7 @@
 
 import Foundation
 import Publish
-import ShellOut
+import Subprocess
 
 import struct Files.Folder
 
@@ -59,12 +59,12 @@ extension PublishingStep {
     .step(named: "Running **npm** Job...") { context in
       let folderPath = try settings.folder(usingContext: context).path
 
-      let commands: [ShellOutCommand] = try jobs.map { job in
+      let invocations: [NPMInvocation] = try jobs.map { job in
         try .npm(job, withSettings: settings, andContext: context)
       }
 
-      for command in commands {
-        try shellOut(to: command, at: folderPath)
+      for invocation in invocations {
+        try await invocation.run(at: folderPath)
       }
     }
   }

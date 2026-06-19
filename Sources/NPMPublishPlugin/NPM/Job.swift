@@ -30,7 +30,6 @@
 import Files
 import Foundation
 import Publish
-import ShellOut
 
 extension NPM {
   /// A type that represents an **npm** command execution.

@@ -1,14 +1,42 @@
 {
+  "originHash" : "f9602d7f11c267404d0a7d2159d35a67f129bffe5026b202bf5be7e8d7722b2e",
   "pins" : [
     {
-      "identity" : "shellout",
+      "identity" : "swift-subprocess",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/shellout.git",
+      "location" : "https://github.com/swiftlang/swift-subprocess.git",
       "state" : {
-        "revision" : "e1577acf2b6e90086d01a6d5e2b8efdaae033568",
-        "version" : "2.3.0"
+        "revision" : "13d087685b95d64d6aac9b94500d347bbe84c39b",
+        "version" : "0.4.0"
+      }
+    },
+    {
+      "identity" : "swift-system",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-system",
+      "state" : {
+        "revision" : "7502b711c92a17741fa625d722b0ccbd595d8ed1",
+        "version" : "1.7.2"
+      }
+    },
+    {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-cmark.git",
+      "state" : {
+        "branch" : "gfm",
+        "revision" : "0101bf2c6ff6a218f93150f340fe5ccf76d9f3aa"
+      }
+    },
+    {
+      "identity" : "swift-markdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-markdown.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4661b550c55abde97d14e35b89e094084669f40a"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

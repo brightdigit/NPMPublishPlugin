@@ -29,7 +29,6 @@
 
 import Foundation
 import Publish
-import ShellOut
 
 extension NPM {
   /// A result builder for building a list of one or more **npm** `Argument`s.

@@ -29,7 +29,6 @@
 
 import Foundation
 import Publish
-import ShellOut
 
 /// A wrapper type holding the path and the type for output file/folder.
 public struct OutputPath: Equatable, Hashable, Sendable {

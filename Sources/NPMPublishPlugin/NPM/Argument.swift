@@ -29,7 +29,6 @@
 
 import Foundation
 import Publish
-import ShellOut
 
 /// An enum representing the type of arguments to pass to the **npm** command.
 extension NPM {

@@ -29,7 +29,6 @@
 
 import Foundation
 import Publish
-import ShellOut
 
 extension NPM {
   /// A type that represents **npm** command.

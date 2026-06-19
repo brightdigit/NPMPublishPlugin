@@ -1,5 +1,5 @@
 //
-//  URL.swift
+//  NPMInvocationError.swift
 //  NPMPublishPlugin
 //
 //  Created by Leo Dion.
@@ -28,37 +28,21 @@
 //
 
 import Foundation
-import Publish
+import Subprocess
 
-#if canImport(FoundationNetworking)
-  import FoundationNetworking
-#endif
+/// An error thrown when an **npm** invocation exits with a non-zero status.
+internal struct NPMInvocationError: Error, CustomStringConvertible {
+  /// The command that was run.
+  internal let command: String
 
-@_documentation(visibility: private)
-extension URL {
-  /// Returns a relative path from this URL to the given base URL.
-  ///
-  /// - Parameter base: The base URL from which to build the relative path.
-  /// - Returns: A relative path from this URL to the given base URL,
-  /// or `nil` if the two URLs are not related.
-  internal func relativePath(from base: URL) -> String? {
-    // Ensure that both URLs represent files:
-    guard isFileURL, base.isFileURL else {
-      return nil
-    }
+  /// The termination status of the **npm** process.
+  internal let terminationStatus: TerminationStatus
 
-    // Remove/replace "." and "..", make paths absolute:
-    let destComponents = standardized.pathComponents
-    let baseComponents = base.standardized.pathComponents
+  /// Anything written to standard error by the process.
+  internal let standardError: String
 
-    let index =
-      (zip(baseComponents, destComponents).enumerated().first { element in
-        element.element.0 != element.element.1
-      }?.offset ?? min(baseComponents.count, destComponents.count))
-
-    // Build relative path:
-    var relComponents = Array(repeating: "..", count: baseComponents.count - index)
-    relComponents.append(contentsOf: destComponents[index...])
-    return relComponents.joined(separator: "/")
+  /// A human-readable description of the failure.
+  internal var description: String {
+    "npm command failed (\(terminationStatus)): \(command)\n\(standardError)"
   }
 }

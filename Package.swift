@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "NPMPublishPlugin",
-  platforms: [.macOS(.v12)],
+  platforms: [.macOS(.v13)],
   products: [
     .library(
       name: "NPMPublishPlugin",
@@ -15,8 +15,8 @@ let package = Package(
   dependencies: [
     .package(path: "../../Publish/Publish"),
     .package(
-      url: "https://github.com/johnsundell/shellout.git",
-      from: "2.3.0"
+      url: "https://github.com/swiftlang/swift-subprocess.git",
+      .upToNextMinor(from: "0.4.0")
     )
   ],
   targets: [
@@ -24,7 +24,7 @@ let package = Package(
       name: "NPMPublishPlugin",
       dependencies: [
         .product(name: "Publish", package: "Publish"),
-        .product(name: "ShellOut", package: "shellout")
+        .product(name: "Subprocess", package: "swift-subprocess")
       ]
     ),
     .testTarget(
