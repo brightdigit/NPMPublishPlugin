@@ -1,11 +1,11 @@
-// swift-tools-version: 5.8
+// swift-tools-version:6.4
 // swiftlint:disable explicit_acl explicit_top_level_acl
 
 import PackageDescription
 
 let package = Package(
   name: "NPMPublishPlugin",
-  platforms: [.macOS(.v13)],
+  platforms: [.macOS(.v15)],
   products: [
     .library(
       name: "NPMPublishPlugin",

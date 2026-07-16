@@ -34,7 +34,7 @@ import Publish
 extension NPM {
   /// An argument to pass to an **npm** command
   /// whether it's a simple string or a reference to an output path from **Publish.**
-  public enum Argument: ExpressibleByStringLiteral {
+  public enum Argument: ExpressibleByStringLiteral, Sendable {
     /// A string argument.
     case string(String)
 

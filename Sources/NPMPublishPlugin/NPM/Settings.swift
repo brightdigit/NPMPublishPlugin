@@ -35,7 +35,7 @@ import struct Files.Folder
 extension NPM {
   /// A type that represents the path  of **npm** command
   ///  and directory to run the command from.
-  public struct Settings {
+  public struct Settings: Sendable {
     /// The custom path to the **npm** executable.
     public let npmPath: String
 

@@ -34,7 +34,7 @@ import struct Files.Folder
 
 extension NPM {
   /// An enum listing each representing the location of **npm** project.
-  public enum Location {
+  public enum Location: Sendable {
     /// A case that represents a project located in a folder.
     case folder(Files.Folder)
 

@@ -32,7 +32,7 @@ import Publish
 
 extension NPM {
   /// A type that represents **npm** command.
-  public struct Command: ExpressibleByStringLiteral {
+  public struct Command: ExpressibleByStringLiteral, Sendable {
     // MARK: Predefined Commands
 
     // swiftlint:disable identifier_name

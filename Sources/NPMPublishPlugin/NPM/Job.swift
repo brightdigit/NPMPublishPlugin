@@ -33,7 +33,7 @@ import Publish
 
 extension NPM {
   /// A type that represents an **npm** command execution.
-  public struct Job {
+  public struct Job: Sendable {
     /// The **npm** command to run.
     public let subcommand: Command
 
