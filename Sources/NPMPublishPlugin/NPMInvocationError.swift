@@ -28,21 +28,24 @@
 //
 
 import Foundation
-import Subprocess
 
-/// An error thrown when an **npm** invocation exits with a non-zero status.
-internal struct NPMInvocationError: Error, CustomStringConvertible {
-  /// The command that was run.
-  internal let command: String
+#if canImport(Subprocess)
+  import Subprocess
 
-  /// The termination status of the **npm** process.
-  internal let terminationStatus: TerminationStatus
+  /// An error thrown when an **npm** invocation exits with a non-zero status.
+  internal struct NPMInvocationError: Error, CustomStringConvertible {
+    /// The command that was run.
+    internal let command: String
 
-  /// Anything written to standard error by the process.
-  internal let standardError: String
+    /// The termination status of the **npm** process.
+    internal let terminationStatus: TerminationStatus
 
-  /// A human-readable description of the failure.
-  internal var description: String {
-    "npm command failed (\(terminationStatus)): \(command)\n\(standardError)"
+    /// Anything written to standard error by the process.
+    internal let standardError: String
+
+    /// A human-readable description of the failure.
+    internal var description: String {
+      "npm command failed (\(terminationStatus)): \(command)\n\(standardError)"
+    }
   }
-}
+#endif

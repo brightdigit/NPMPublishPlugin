@@ -29,89 +29,92 @@
 
 import Foundation
 import Publish
-import Subprocess
 
-import struct Files.Folder
+#if canImport(Subprocess)
+  import Subprocess
 
-/// A resolved **npm** invocation describing the executable and its arguments.
-///
-/// This replaces the previous `ShellOutCommand` abstraction. It captures the
-/// **npm** executable path and the fully-resolved argument list so the command
-/// can be run directly with `swift-subprocess` (no shell required).
-internal struct NPMInvocation: Sendable, Equatable {
-  /// The path to (or name of) the **npm** executable.
-  internal let npmPath: String
+  import struct Files.Folder
 
-  /// The resolved arguments to pass to **npm** (subcommand + any arguments).
-  internal let arguments: [String]
-
-  /// A shell-style string representation of the full command (e.g. `npm init --yes`).
-  internal var string: String {
-    ([npmPath] + arguments).joined(separator: " ")
-  }
-
-  /// This creates an `NPMInvocation` that represents the **npm** expression to execute.
+  /// A resolved **npm** invocation describing the executable and its arguments.
   ///
-  ///  - Parameters:
-  ///    - job: This is the **npm** command to execute.
-  ///    - settings: Any settings required for **npm** job.
-  ///    - context: The context in which to run the NPM job.
-  ///  - Throws: An error if the project folder cannot be retrieved or
-  ///  output paths cannot be created.
-  ///  - Returns: The resulting `NPMInvocation`.
-  internal static func npm(
-    _ job: NPM.Job,
-    withSettings settings: NPM.Settings,
-    andContext context: NPM.Context
-  ) throws -> NPMInvocation {
-    let folder = try settings.folder(usingContext: context)
+  /// This replaces the previous `ShellOutCommand` abstraction. It captures the
+  /// **npm** executable path and the fully-resolved argument list so the command
+  /// can be run directly with `swift-subprocess` (no shell required).
+  internal struct NPMInvocation: Sendable, Equatable {
+    /// The path to (or name of) the **npm** executable.
+    internal let npmPath: String
 
-    // Build map for the output paths and their string representation on the file system.
-    let outputPathMap = try job.createOutput(using: context, relativeTo: folder)
+    /// The resolved arguments to pass to **npm** (subcommand + any arguments).
+    internal let arguments: [String]
 
-    // Build string represetnation of all **npm** job arguments.
-    let argumentsArray: [String] = job.arguments.map {
-      $0.relativePath(basedOn: outputPathMap)
+    /// A shell-style string representation of the full command (e.g. `npm init --yes`).
+    internal var string: String {
+      ([npmPath] + arguments).joined(separator: " ")
     }
 
-    let subcommandString = job.subcommand.string
-    return NPMInvocation(
-      npmPath: settings.npmPath,
-      arguments: [subcommandString] + argumentsArray
-    )
-  }
+    /// This creates an `NPMInvocation` that represents the **npm** expression to execute.
+    ///
+    ///  - Parameters:
+    ///    - job: This is the **npm** command to execute.
+    ///    - settings: Any settings required for **npm** job.
+    ///    - context: The context in which to run the NPM job.
+    ///  - Throws: An error if the project folder cannot be retrieved or
+    ///  output paths cannot be created.
+    ///  - Returns: The resulting `NPMInvocation`.
+    internal static func npm(
+      _ job: NPM.Job,
+      withSettings settings: NPM.Settings,
+      andContext context: NPM.Context
+    ) throws -> NPMInvocation {
+      let folder = try settings.folder(usingContext: context)
 
-  /// Escapes spaces in a path so it survives being embedded in a shell command,
-  /// matching the behaviour previously provided by `ShellOut`.
-  private static func escapingSpaces(_ value: String) -> String {
-    value.replacingOccurrences(of: " ", with: "\\ ")
-  }
+      // Build map for the output paths and their string representation on the file system.
+      let outputPathMap = try job.createOutput(using: context, relativeTo: folder)
 
-  /// Runs the **npm** invocation in the given directory.
-  ///
-  /// The command string is executed through `bash` so that argument tokens
-  /// embedded within a single ``NPM/Argument`` (and any output-path quoting)
-  /// are split and interpreted exactly as they were under the previous
-  /// `ShellOut`-based implementation.
-  ///
-  /// - Parameter path: The working directory to run the command from.
-  /// - Throws: ``NPMInvocationError`` if the process exits with a non-zero status.
-  internal func run(at path: String) async throws {
-    let command = "cd \(Self.escapingSpaces(path)) && \(string)"
+      // Build string represetnation of all **npm** job arguments.
+      let argumentsArray: [String] = job.arguments.map {
+        $0.relativePath(basedOn: outputPathMap)
+      }
 
-    let result = try await Subprocess.run(
-      .name("bash"),
-      arguments: ["-c", command],
-      output: .discarded,
-      error: .string(limit: .max)
-    )
-
-    guard result.terminationStatus.isSuccess else {
-      throw NPMInvocationError(
-        command: command,
-        terminationStatus: result.terminationStatus,
-        standardError: result.standardError ?? ""
+      let subcommandString = job.subcommand.string
+      return NPMInvocation(
+        npmPath: settings.npmPath,
+        arguments: [subcommandString] + argumentsArray
       )
     }
+
+    /// Escapes spaces in a path so it survives being embedded in a shell command,
+    /// matching the behaviour previously provided by `ShellOut`.
+    private static func escapingSpaces(_ value: String) -> String {
+      value.replacingOccurrences(of: " ", with: "\\ ")
+    }
+
+    /// Runs the **npm** invocation in the given directory.
+    ///
+    /// The command string is executed through `bash` so that argument tokens
+    /// embedded within a single ``NPM/Argument`` (and any output-path quoting)
+    /// are split and interpreted exactly as they were under the previous
+    /// `ShellOut`-based implementation.
+    ///
+    /// - Parameter path: The working directory to run the command from.
+    /// - Throws: ``NPMInvocationError`` if the process exits with a non-zero status.
+    internal func run(at path: String) async throws {
+      let command = "cd \(Self.escapingSpaces(path)) && \(string)"
+
+      let result = try await Subprocess.run(
+        .name("bash"),
+        arguments: ["-c", command],
+        output: .discarded,
+        error: .string(limit: .max)
+      )
+
+      guard result.terminationStatus.isSuccess else {
+        throw NPMInvocationError(
+          command: command,
+          terminationStatus: result.terminationStatus,
+          standardError: result.standardError ?? ""
+        )
+      }
+    }
   }
-}
+#endif

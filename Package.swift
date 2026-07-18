@@ -5,7 +5,12 @@ import PackageDescription
 
 let package = Package(
   name: "NPMPublishPlugin",
-  platforms: [.macOS(.v15)],
+  platforms: [
+    .macOS(.v15),
+    .iOS(.v18),
+    .tvOS(.v18),
+    .watchOS(.v11)
+  ],
   products: [
     .library(
       name: "NPMPublishPlugin",
@@ -24,12 +29,27 @@ let package = Package(
       name: "NPMPublishPlugin",
       dependencies: [
         .product(name: "Publish", package: "Publish"),
-        .product(name: "Subprocess", package: "swift-subprocess")
+        .product(
+          name: "Subprocess",
+          package: "swift-subprocess",
+          condition: .when(platforms: Platform.processExecution)
+        )
       ]
     ),
     .testTarget(
       name: "NPMPublishPluginTests",
-      dependencies: ["NPMPublishPlugin"]
+      dependencies: [
+        "NPMPublishPlugin",
+        .product(
+          name: "Subprocess",
+          package: "swift-subprocess",
+          condition: .when(platforms: Platform.processExecution)
+        )
+      ]
     )
   ]
 )
+
+extension Platform {
+  static let processExecution: [Platform] = [.macOS, .linux, .windows, .android]
+}
