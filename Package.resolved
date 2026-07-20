@@ -1,5 +1,5 @@
 {
-  "originHash" : "6369ef6ea4b8b3c4d18221f9a0ef69c5db1f8854685a3cd6037e3cf7ab237d2d",
+  "originHash" : "ac18999e9186ea0a288cd32fec46f36da47af036be3b74b419152b7514c1e1b7",
   "pins" : [
     {
       "identity" : "files",
@@ -23,6 +23,15 @@
       "location" : "https://github.com/brightdigit/Plot.git",
       "state" : {
         "revision" : "daa8daa44f8eb0a1865085ee0f36ca02aa16b7f4"
+      }
+    },
+    {
+      "identity" : "publish",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/brightdigit/Publish.git",
+      "state" : {
+        "branch" : "brightdigit-com-260406",
+        "revision" : "7648facf2aeea2b7c2bcb678cc5bc71629997f4a"
       }
     },
     {
