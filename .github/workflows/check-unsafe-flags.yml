@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  PUBLISH_BRANCH: brightdigit-com-260406
-
 jobs:
   dump-package-check:
     name: Dump Swift package (authoritative) and scan JSON
@@ -18,9 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Ensure remote deps
-        shell: bash
-        run: ./Scripts/ensure-remote-deps.sh
 
       - name: Install jq
         run: |
