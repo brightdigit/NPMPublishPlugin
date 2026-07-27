@@ -1,13 +1,13 @@
 {
-  "originHash" : "ac18999e9186ea0a288cd32fec46f36da47af036be3b74b419152b7514c1e1b7",
+  "originHash" : "b479478433ebd187fc747f7d050738ca1969ec2015e182b9ece39ebb640fc118",
   "pins" : [
     {
       "identity" : "files",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/brightdigit/Files.git",
       "state" : {
-        "branch" : "brightdigit-com-260406",
-        "revision" : "7ee69ba0bfc0d2c771458ea17ee4933545e896a8"
+        "branch" : "main",
+        "revision" : "6638e7c3de269443e784b5fd60bf4f6a1f33e36e"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/brightdigit/Ink.git",
       "state" : {
-        "branch" : "brightdigit-com-260406",
-        "revision" : "443d80e352ec3cdd07eed54bd84a9789378d8665"
+        "branch" : "main",
+        "revision" : "7f5072820db01c259b4470a6117e759358bcf986"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/brightdigit/Plot.git",
       "state" : {
-        "branch" : "brightdigit-com-260406",
-        "revision" : "c357a8a5303159900017176a1450f6b825e6fb93"
+        "branch" : "main",
+        "revision" : "e966c8779e955408d021a0b8be9c80a42b942ff2"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/brightdigit/Publish.git",
       "state" : {
-        "branch" : "brightdigit-com-260406",
-        "revision" : "7118f0a6967a98f3e8e0b69c696be85258504ed2"
+        "branch" : "main",
+        "revision" : "22229e1dd249e5c8e3b6bb0f981c0b45f6f73031"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/swiftlang/swift-markdown.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4661b550c55abde97d14e35b89e094084669f40a"
+        "revision" : "27b7fc1a19068bcea3d2072db0ce86360d1400ed"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system",
       "state" : {
-        "revision" : "7502b711c92a17741fa625d722b0ccbd595d8ed1",
-        "version" : "1.7.2"
+        "revision" : "50688cacbd41d547e9eb9f7a213542340b7c442b",
+        "version" : "1.7.5"
       }
     }
   ],
