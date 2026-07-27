@@ -35,7 +35,9 @@ let package = Package(
         .product(
           name: "Subprocess",
           package: "swift-subprocess",
-          condition: .when(platforms: Platform.processExecution)
+          condition: .when(
+            platforms: [.macOS, .linux, .windows, .android]
+          )
         )
       ]
     ),
@@ -46,15 +48,13 @@ let package = Package(
         .product(
           name: "Subprocess",
           package: "swift-subprocess",
-          condition: .when(platforms: Platform.processExecution)
+          condition: .when(
+            platforms: [.macOS, .linux, .windows, .android]
+          )
         )
       ]
     )
   ]
 )
-
-extension Platform {
-  static let processExecution: [Platform] = [.macOS, .linux, .windows, .android]
-}
 
 // swiftlint:enable explicit_acl explicit_top_level_acl
