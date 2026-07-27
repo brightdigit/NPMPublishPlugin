@@ -1,12 +1,40 @@
+//
+//  Argument.swift
+//  NPMPublishPlugin
+//
+//  Created by Leo Dion.
+//  Copyright © 2026 BrightDigit.
+//
+//  Permission is hereby granted, free of charge, to any person
+//  obtaining a copy of this software and associated documentation
+//  files (the "Software"), to deal in the Software without
+//  restriction, including without limitation the rights to use,
+//  copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the
+//  Software is furnished to do so, subject to the following
+//  conditions:
+//
+//  The above copyright notice and this permission notice shall be
+//  included in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+//  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+//  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+//  OTHER DEALINGS IN THE SOFTWARE.
+//
+
 import Foundation
 import Publish
-import ShellOut
 
 /// An enum representing the type of arguments to pass to the **npm** command.
 extension NPM {
   /// An argument to pass to an **npm** command
   /// whether it's a simple string or a reference to an output path from **Publish.**
-  public enum Argument: ExpressibleByStringLiteral {
+  public enum Argument: ExpressibleByStringLiteral, Sendable {
     /// A string argument.
     case string(String)
 
@@ -28,12 +56,38 @@ extension NPM.Argument {
     withDefaultValue defaultValue: String = ""
   ) -> String {
     switch self {
-    case let .string(value):
+    case .string(let value):
       return value
 
-    case let .path(path):
+    case .path(let path):
       let outputPath = dictionary[path] ?? defaultValue
       return "\"\(outputPath)\""
+    }
+  }
+
+  /// Resolves this argument into the individual arguments passed to **npm**.
+  ///
+  /// A `.string` argument may hold several whitespace-separated tokens
+  /// (e.g. `"publish -- --output-filename"`), which a shell would have split
+  /// into separate arguments; it is split here so the command can be executed
+  /// directly without a shell. A `.path` argument is always a single argument,
+  /// so it is passed through unsplit and unquoted — preserving paths that
+  /// themselves contain spaces.
+  ///
+  /// - Parameters:
+  ///   - dictionary: The map of output paths to their resolved relative paths.
+  ///   - defaultValue: The value to use when an output path is missing.
+  /// - Returns: The resolved arguments, in order.
+  internal func resolvedArguments(
+    basedOn dictionary: NPM.RelativePathMap,
+    withDefaultValue defaultValue: String = ""
+  ) -> [String] {
+    switch self {
+    case .string(let value):
+      return value.split(separator: " ").map(String.init)
+
+    case .path(let path):
+      return [dictionary[path] ?? defaultValue]
     }
   }
 }

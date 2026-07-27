@@ -1,77 +1,78 @@
 {
+  "originHash" : "b479478433ebd187fc747f7d050738ca1969ec2015e182b9ece39ebb640fc118",
   "pins" : [
-    {
-      "identity" : "codextended",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/codextended.git",
-      "state" : {
-        "revision" : "8d7c46dfc9c55240870cf5561d6cefa41e3d7105",
-        "version" : "0.3.0"
-      }
-    },
-    {
-      "identity" : "collectionconcurrencykit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/collectionConcurrencyKit.git",
-      "state" : {
-        "revision" : "b4f23e24b5a1bff301efc5e70871083ca029ff95",
-        "version" : "0.2.0"
-      }
-    },
     {
       "identity" : "files",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/files.git",
+      "location" : "https://github.com/brightdigit/Files.git",
       "state" : {
-        "revision" : "d273b5b7025d386feef79ef6bad7de762e106eaf",
-        "version" : "4.2.0"
+        "branch" : "main",
+        "revision" : "6638e7c3de269443e784b5fd60bf4f6a1f33e36e"
       }
     },
     {
       "identity" : "ink",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/ink.git",
+      "location" : "https://github.com/brightdigit/Ink.git",
       "state" : {
-        "revision" : "bcc9f219900a62c4210e6db726035d7f03ae757b",
-        "version" : "0.6.0"
+        "branch" : "main",
+        "revision" : "7f5072820db01c259b4470a6117e759358bcf986"
       }
     },
     {
       "identity" : "plot",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/plot.git",
+      "location" : "https://github.com/brightdigit/Plot.git",
       "state" : {
-        "revision" : "271926b4413fe868739d99f5eadcf2bd6cd62fb8",
-        "version" : "0.14.0"
+        "branch" : "main",
+        "revision" : "e966c8779e955408d021a0b8be9c80a42b942ff2"
       }
     },
     {
       "identity" : "publish",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/publish.git",
+      "location" : "https://github.com/brightdigit/Publish.git",
       "state" : {
-        "revision" : "1c8ad00d39c985cb5d497153241a2f1b654e0d40",
-        "version" : "0.9.0"
+        "branch" : "main",
+        "revision" : "22229e1dd249e5c8e3b6bb0f981c0b45f6f73031"
       }
     },
     {
-      "identity" : "shellout",
+      "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/shellout.git",
+      "location" : "https://github.com/swiftlang/swift-cmark.git",
       "state" : {
-        "revision" : "e1577acf2b6e90086d01a6d5e2b8efdaae033568",
-        "version" : "2.3.0"
+        "branch" : "gfm",
+        "revision" : "0101bf2c6ff6a218f93150f340fe5ccf76d9f3aa"
       }
     },
     {
-      "identity" : "sweep",
+      "identity" : "swift-markdown",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/sweep.git",
+      "location" : "https://github.com/swiftlang/swift-markdown.git",
       "state" : {
-        "revision" : "801c2878e4c6c5baf32fe132e1f3f3af6f9fd1b0",
+        "branch" : "main",
+        "revision" : "27b7fc1a19068bcea3d2072db0ce86360d1400ed"
+      }
+    },
+    {
+      "identity" : "swift-subprocess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-subprocess.git",
+      "state" : {
+        "revision" : "13d087685b95d64d6aac9b94500d347bbe84c39b",
         "version" : "0.4.0"
+      }
+    },
+    {
+      "identity" : "swift-system",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-system",
+      "state" : {
+        "revision" : "50688cacbd41d547e9eb9f7a213542340b7c442b",
+        "version" : "1.7.5"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
