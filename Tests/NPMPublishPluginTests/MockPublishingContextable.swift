@@ -1,7 +1,8 @@
 import Files
-@testable import NPMPublishPlugin
 import Publish
 import XCTest
+
+@testable import NPMPublishPlugin
 
 internal class MockPublishingContextable: PublishingContextable {
   internal var passedOutputPathFile: Publish.Path?

@@ -1,11 +1,48 @@
+//
+//  Job.swift
+//  NPMPublishPlugin
+//
+//  Created by Leo Dion.
+//  Copyright © 2026 BrightDigit.
+//
+//  Permission is hereby granted, free of charge, to any person
+//  obtaining a copy of this software and associated documentation
+//  files (the "Software"), to deal in the Software without
+//  restriction, including without limitation the rights to use,
+//  copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the
+//  Software is furnished to do so, subject to the following
+//  conditions:
+//
+//  The above copyright notice and this permission notice shall be
+//  included in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+//  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+//  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+//  OTHER DEALINGS IN THE SOFTWARE.
+//
+
 import Files
 import Foundation
 import Publish
-import ShellOut
 
 extension NPM {
   /// A type that represents an **npm** command execution.
-  public struct Job {
+  public struct Job: Sendable {
+    /// The **npm** command to run.
+    public let subcommand: Command
+
+    /// The relative paths of any output files that should be copied to the output folder.
+    public let outputRelativePaths: [OutputPath]
+
+    /// Any additional arguments to pass to the **npm** command.
+    public let arguments: [Argument]
+
     /// Initializes a new **npm** `Job` with the given arguments and output paths.
     ///
     /// - Parameters:
@@ -37,15 +74,6 @@ extension NPM {
       self.outputRelativePaths = outputRelativePaths
       arguments = argBuilder()
     }
-
-    /// The **npm** command to run.
-    public let subcommand: Command
-
-    /// The relative paths of any output files that should be copied to the output folder.
-    public let outputRelativePaths: [OutputPath]
-
-    /// Any additional arguments to pass to the **npm** command.
-    public let arguments: [Argument]
   }
 }
 
@@ -53,9 +81,10 @@ extension NPM.Job {
   /// Creates the output files and folder and
   ///  returns a `Dictionary` of the ``OutputPath`` and the resulting relative path.
   /// - Parameters:
-  ///   - context: `PublishingContext` from **Publish**
+  ///   - context: The **npm** context used to create the output files and folders.
   ///   - folder: `Folder` from which to return the relative paths to.
   /// - Returns: `Dictionary` of the ``OutputPath`` and the resulting relative path.
+  /// - Throws: An error in case an output file or folder couldn't be created.
   internal func createOutput(
     using context: NPM.Context,
     relativeTo folder: Files.Folder
@@ -79,7 +108,7 @@ public func ci() -> NPM.Job {
 ///
 /// - Parameters:
 ///   - paths: The output paths required for **npm** command to finish its job.
-///   - argBuilder: A builder for any additional of arguments
+///   - arguments: A builder for any additional arguments
 ///    to pass to the **npm** command.
 /// - Returns: An ``NPM/Job`` instance for the `run` command.
 public func run(
