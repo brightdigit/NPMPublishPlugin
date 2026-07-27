@@ -35,6 +35,14 @@ import Publish
 
   import struct Files.Folder
 
+  // Subprocess vends `FilePath` from `System` on Apple platforms and from
+  // `SystemPackage` elsewhere; import whichever backs this platform.
+  #if canImport(System)
+    import struct System.FilePath
+  #else
+    import struct SystemPackage.FilePath
+  #endif
+
   /// A resolved **npm** invocation describing the executable and its arguments.
   ///
   /// This replaces the previous `ShellOutCommand` abstraction. It captures the
@@ -50,6 +58,14 @@ import Publish
     /// A shell-style string representation of the full command (e.g. `npm init --yes`).
     internal var string: String {
       ([npmPath] + arguments).joined(separator: " ")
+    }
+
+    /// The **npm** executable to launch.
+    ///
+    /// A bare name (the `npm` default) is resolved against `PATH`; anything
+    /// that looks like a path is used as-is.
+    private var executable: Executable {
+      npmPath.contains("/") ? .path(FilePath(npmPath)) : .name(npmPath)
     }
 
     /// This creates an `NPMInvocation` that represents the **npm** expression to execute.
@@ -71,9 +87,9 @@ import Publish
       // Build map for the output paths and their string representation on the file system.
       let outputPathMap = try job.createOutput(using: context, relativeTo: folder)
 
-      // Build string represetnation of all **npm** job arguments.
-      let argumentsArray: [String] = job.arguments.map {
-        $0.relativePath(basedOn: outputPathMap)
+      // Resolve every **npm** job argument into its individual arguments.
+      let argumentsArray: [String] = job.arguments.flatMap {
+        $0.resolvedArguments(basedOn: outputPathMap)
       }
 
       let subcommandString = job.subcommand.string
@@ -83,34 +99,26 @@ import Publish
       )
     }
 
-    /// Escapes spaces in a path so it survives being embedded in a shell command,
-    /// matching the behaviour previously provided by `ShellOut`.
-    private static func escapingSpaces(_ value: String) -> String {
-      value.replacingOccurrences(of: " ", with: "\\ ")
-    }
-
     /// Runs the **npm** invocation in the given directory.
     ///
-    /// The command string is executed through `bash` so that argument tokens
-    /// embedded within a single ``NPM/Argument`` (and any output-path quoting)
-    /// are split and interpreted exactly as they were under the previous
-    /// `ShellOut`-based implementation.
+    /// The executable and its arguments are passed directly to the process, so
+    /// no shell is involved: argument values cannot be reinterpreted as shell
+    /// syntax, and paths containing spaces need no escaping.
     ///
     /// - Parameter path: The working directory to run the command from.
     /// - Throws: ``NPMInvocationError`` if the process exits with a non-zero status.
     internal func run(at path: String) async throws {
-      let command = "cd \(Self.escapingSpaces(path)) && \(string)"
-
       let result = try await Subprocess.run(
-        .name("bash"),
-        arguments: ["-c", command],
+        executable,
+        arguments: Arguments(arguments),
+        workingDirectory: FilePath(path),
         output: .discarded,
         error: .string(limit: .max)
       )
 
       guard result.terminationStatus.isSuccess else {
         throw NPMInvocationError(
-          command: command,
+          command: string,
           terminationStatus: result.terminationStatus,
           standardError: result.standardError ?? ""
         )

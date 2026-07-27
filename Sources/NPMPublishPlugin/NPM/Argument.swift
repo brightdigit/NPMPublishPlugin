@@ -64,4 +64,30 @@ extension NPM.Argument {
       return "\"\(outputPath)\""
     }
   }
+
+  /// Resolves this argument into the individual arguments passed to **npm**.
+  ///
+  /// A `.string` argument may hold several whitespace-separated tokens
+  /// (e.g. `"publish -- --output-filename"`), which a shell would have split
+  /// into separate arguments; it is split here so the command can be executed
+  /// directly without a shell. A `.path` argument is always a single argument,
+  /// so it is passed through unsplit and unquoted — preserving paths that
+  /// themselves contain spaces.
+  ///
+  /// - Parameters:
+  ///   - dictionary: The map of output paths to their resolved relative paths.
+  ///   - defaultValue: The value to use when an output path is missing.
+  /// - Returns: The resolved arguments, in order.
+  internal func resolvedArguments(
+    basedOn dictionary: NPM.RelativePathMap,
+    withDefaultValue defaultValue: String = ""
+  ) -> [String] {
+    switch self {
+    case .string(let value):
+      return value.split(separator: " ").map(String.init)
+
+    case .path(let path):
+      return [dictionary[path] ?? defaultValue]
+    }
+  }
 }
