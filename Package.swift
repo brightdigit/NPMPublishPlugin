@@ -56,3 +56,5 @@ let package = Package(
 extension Platform {
   static let processExecution: [Platform] = [.macOS, .linux, .windows, .android]
 }
+
+// swiftlint:enable explicit_acl explicit_top_level_acl
