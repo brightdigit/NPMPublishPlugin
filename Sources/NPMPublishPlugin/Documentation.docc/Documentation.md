@@ -1,28 +1,31 @@
 # ``NPMPublishPlugin``
 
-A Publish plugin that makes it easy to run **npm** commands for any Publish website. 
+A Publish plugin that makes it easy to run **npm** commands for any Publish website.
 
 ## Overview
 
-`NPMPublishPlugin` allows you to integrate an NPM package into your **Publish** site. If you require javascript or css to be built for your site, this is the ideal plugin for you.
+`NPMPublishPlugin` lets you integrate an npm package into your **Publish** site. If you need JavaScript or CSS built as part of publishing, this plugin runs those **npm** steps in your pipeline.
 
-### Requirements 
+### Requirements
+
+**Toolchain**
+
+- Swift tools **6.4** (Swift 6.4 toolchain)
 
 **Apple Platforms**
 
-- Xcode 14.3 or later
-- Swift 5.8 or later
+- macOS 15 or later
+- iOS 18 or later
+- tvOS 18 or later
+- watchOS 11 or later
 
-- macOS 12 or later deployment targets
+**Process execution**
 
-**Linux**
-
-- Ubuntu 18.04 or later
-- Swift 5.8 or late
+Process execution uses [swift-subprocess](https://github.com/swiftlang/swift-subprocess). The ``Publish/PublishingStep`` `npm` APIs are available where Subprocess can be imported (macOS, Linux, Windows, and Android per the package’s dependency conditions).
 
 ### Installation
 
-To install it into your [Publish](https://github.com/johnsundell/publish) package, add it as a dependency within your `Package.swift` manifest:
+Add **Publish** and **NPMPublishPlugin** as dependencies in your site’s `Package.swift`:
 
 ```swift
 let package = Package(
@@ -30,12 +33,12 @@ let package = Package(
   dependencies: [
       ...
       .package(
-         url: "https://github.com/johnsundell/publish.git", 
-         from: "0.9.0"
+        url: "https://github.com/brightdigit/Publish.git",
+        from: "1.0.0-alpha.1"
       ),
       .package(
         url: "https://github.com/brightdigit/NPMPublishPlugin.git",
-        from: "1.0.0"
+        from: "2.0.0-alpha.1"
       )
   ],
   targets: [
@@ -43,7 +46,7 @@ let package = Package(
       ...
       dependencies: [
           ...
-          .product(name: "Publish", package: "publish"),
+          .product(name: "Publish", package: "Publish"),
           .product(name: "NPMPublishPlugin", package: "NPMPublishPlugin"),
       ]
     )
@@ -60,7 +63,7 @@ import NPMPublishPlugin
 
 ### Usage
 
-Add the `npm` to your **Publish** steps:
+Add an `npm` step to your **Publish** pipeline:
 
 ```swift
 import NPMPublishPlugin
@@ -88,6 +91,8 @@ try DeliciousRecipes().publish(using: [
 ])
 ```
 
+There are three ways to create the step: ``NPM/Settings`` plus an array of ``NPM/Job`` values, or `npm(_:at:_:)` with a `Folder` or Publish `Path` and an ``NPM/JobBuilder`` block. Built-in helpers ``ci()`` and ``run(paths:_:)`` cover the common commands; pass string or ``OutputPath`` values as ``NPM/Argument``s.
+
 ## Topics
 
 ### Setting up your Publish step
@@ -103,4 +108,3 @@ try DeliciousRecipes().publish(using: [
 
 * ``ci()``
 * ``run(paths:_:)``
-

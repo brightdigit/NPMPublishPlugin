@@ -18,7 +18,6 @@ A Publish plugin that makes it easy to run **npm** commands for any Publish webs
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/brightdigit/NPMPublishPlugin)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
 [![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/brightdigit/NPMPublishPlugin?label=debt)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
 [![Code Climate issues](https://img.shields.io/codeclimate/issues/brightdigit/NPMPublishPlugin)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
-[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 
 # Table of Contents
 
@@ -29,54 +28,58 @@ A Publish plugin that makes it easy to run **npm** commands for any Publish webs
    * [Configuring npm](#configuring-npm)
    * [Running npm commands](#running-npm-commands)
    * [On Argument](#on-argument)
+* [Migrating from 1.x](#migrating-from-1x)
 * [References](#references)
 * [License](#license)
 
 # Introduction
 
-`NPMPublishPlugin` allows you to integrate an NPM package into your **Publish** site. If you require javascript or css to be built for your site, this is the ideal plugin for you.
+`NPMPublishPlugin` lets you integrate an npm package into your **Publish** site. If you need JavaScript or CSS built as part of publishing, this plugin runs those **npm** steps in your pipeline.
 
-## Requirements 
+## Requirements
+
+**Toolchain**
+
+- Swift tools **6.4** (Swift 6.4 toolchain)
 
 **Apple Platforms**
 
-- Xcode 14.3 or later
-- Swift 5.8 or later
+- macOS 15 or later
+- iOS 18 or later
+- tvOS 18 or later
+- watchOS 11 or later
 
-- macOS 12 or later deployment targets
+**Process execution**
 
-**Linux**
-
-- Ubuntu 18.04 or later
-- Swift 5.8 or late
+Process execution uses [swift-subprocess](https://github.com/swiftlang/swift-subprocess). The `PublishingStep.npm` APIs are available where Subprocess can be imported (macOS, Linux, Windows, and Android per the package’s dependency conditions).
 
 ## Installation
 
-To install it into your [Publish](https://github.com/johnsundell/publish) package, add it as a dependency within your `Package.swift` manifest:
+Add **Publish** and **NPMPublishPlugin** as dependencies in your site’s `Package.swift`:
 
 ```swift
 let package = Package(
   ...
   dependencies: [
-	  ...
-	  .package(
-		 url: "https://github.com/johnsundell/publish.git", 
-		 from: "0.9.0"
-	  ),
-	  .package(
-		url: "https://github.com/brightdigit/NPMPublishPlugin.git",
-		from: "1.0.0"
-	  )
+      ...
+      .package(
+        url: "https://github.com/brightdigit/Publish.git",
+        from: "1.0.0-alpha.1"
+      ),
+      .package(
+        url: "https://github.com/brightdigit/NPMPublishPlugin.git",
+        from: "2.0.0-alpha.1"
+      )
   ],
   targets: [
-	.target(
-	  ...
-	  dependencies: [
-		  ...
-		  .product(name: "Publish", package: "publish"),
-		  .product(name: "NPMPublishPlugin", package: "NPMPublishPlugin"),
-	  ]
-	)
+    .target(
+      ...
+      dependencies: [
+          ...
+          .product(name: "Publish", package: "Publish"),
+          .product(name: "NPMPublishPlugin", package: "NPMPublishPlugin"),
+      ]
+    )
   ]
   ...
 )
@@ -90,7 +93,7 @@ import NPMPublishPlugin
 
 # Usage
 
-Add the `npm` to your **Publish** steps:
+Add an `npm` step to your **Publish** pipeline:
 
 ```swift
 import NPMPublishPlugin
@@ -98,41 +101,44 @@ import NPMPublishPlugin
 let mainJS = OutputPath.file("js/main.js")
 
 try DeliciousRecipes().publish(using: [
-	.addMarkdownFiles(),
-	.copyResources(),
-	.addFavoriteItems(),
-	.addDefaultSectionTitles(),
-	.generateHTML(withTheme: .delicious),
-	.generateRSSFeed(including: [.recipes]),
-	.generateSiteMap(),
-	// from the **npm** package directory at `Styling`
-	.npm(npmPath, at: "Styling") {
-	  // run `npm ci`
-	  ci()
-	  // run `npm run publish -- --output-filename js/main.js`
-	  run(paths: [mainJS]) {
-		"publish -- --output-filename"
-		mainJS
-	  }
-	}
+    .addMarkdownFiles(),
+    .copyResources(),
+    .addFavoriteItems(),
+    .addDefaultSectionTitles(),
+    .generateHTML(withTheme: .delicious),
+    .generateRSSFeed(including: [.recipes]),
+    .generateSiteMap(),
+    // from the **npm** package directory at `Styling`
+    .npm(npmPath, at: "Styling") {
+      // run `npm ci`
+      ci()
+      // run `npm run publish -- --output-filename js/main.js`
+      run(paths: [mainJS]) {
+        "publish -- --output-filename"
+        mainJS
+      }
+    }
 ])
 ```
 
 ## Configuring npm
 
-`NPMPublishPlugin` includes three ways to create a **Publish** step to run **npm**.
+`NPMPublishPlugin` provides three ways to create a **Publish** step that runs **npm**:
 
-Firstly, you can supply a `Settings` and an array of `Job` items.
-However most likely  you'll want to to use the other two methods which you can pass:
+1. Pass an `NPM.Settings` value and an array of `NPM.Job` items to `PublishingStep.npm(run:withSettings:)`.
+2. Call `npm(_:at:_:)` with an optional path to the **npm** executable and a `Folder` to run from, plus an `NPM.JobBuilder` block.
+3. Call `npm(_:at:_:)` with an optional path to the **npm** executable and a Publish `Path` to run from, plus an `NPM.JobBuilder` block.
 
-* an optional path to the **npm** command
-* an optional path to the *current directory* to run from as either a `Folder` or `Path ` object from **Publish**
-* using the ``NPM/JobBuilder`` pass the series jobs similar to how **SwiftUI** builds a `View` using its DSL
+Most sites use options 2 or 3. The job builder lists jobs the same way a SwiftUI view builder lists views.
 
 ## Running npm commands
 
-`NPMPublishPlugin` comes with two commands `ci` and `run`. If you wish to include more commands, 
-simply create a function which can take in `Arguments` similar to the `run` method:
+Built-in helpers cover the two most common commands:
+
+- `ci()` — runs `npm ci`
+- `run(paths:_:)` — runs `npm run` with optional output paths and arguments
+
+To add another command, create a helper that returns an `NPM.Job`, similar to `run`:
 
 ```swift
 public func run(
@@ -143,15 +149,25 @@ public func run(
 }
 ```
 
+You can also construct an `NPM.Job` with any `NPM.Command` (string-convertible) and arguments yourself.
+
 ## On `Argument`
 
-The `Argument` item can be either a simple string or an `OutputPath` that's dynamic and based a `Path` from the **Publish** library.
- 
+Each `NPM.Argument` is either:
+
+- a **string** (may contain several whitespace-separated tokens, which are split when the process is launched), or
+- an **`OutputPath`**, resolved relative to the npm project folder so Publish output paths can be passed into **npm** without hard-coding absolute paths
+
+# Migrating from 1.x
+
+`2.0.0-alpha.1` is source-breaking relative to `1.0.0`. Bump to Swift 6.4, depend on Publish `1.0.0-alpha.1` and NPMPublishPlugin `2.0.0-alpha.1`, and expect API changes around command execution (now based on swift-subprocess). See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the full changelog.
+
 # References
 
-* [Publish by John Sundell](https://github.com/JohnSundell/Publish)
+* [Publish](https://github.com/brightdigit/Publish)
 * [npm](https://www.npmjs.com)
+* [swift-subprocess](https://github.com/swiftlang/swift-subprocess)
 
-# License 
+# License
 
 This code is distributed under the MIT license. See the [LICENSE](https://github.com/brightdigit/NPMPublishPlugin/LICENSE) file for more info.
