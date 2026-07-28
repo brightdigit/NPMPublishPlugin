@@ -2,22 +2,14 @@
 
 A Publish plugin that makes it easy to run **npm** commands for any Publish website.
 
-[![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20macOS-success?logo=swift)](https://swift.org)
-[![Twitter](https://img.shields.io/badge/twitter-@brightdigit-blue.svg?style=flat)](http://twitter.com/brightdigit)
-![GitHub](https://img.shields.io/github/license/brightdigit/NPMPublishPlugin)
-![GitHub issues](https://img.shields.io/github/issues/brightdigit/NPMPublishPlugin)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brightdigit/NPMPublishPlugin/NPMPublishPlugin.yml?label=actions&logo=github&?branch=main)
-
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FNPMPublishPlugin%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/NPMPublishPlugin)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FNPMPublishPlugin%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/NPMPublishPlugin)
-
-
+[![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FNPMPublishPlugin%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/NPMPublishPlugin)
+[![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FNPMPublishPlugin%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/NPMPublishPlugin)
+[![Documentation](https://img.shields.io/badge/docc-read_documentation-blue)](https://swiftpackageindex.com/brightdigit/NPMPublishPlugin/documentation)
+[![License](https://img.shields.io/github/license/brightdigit/NPMPublishPlugin)](LICENSE)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brightdigit/NPMPublishPlugin/NPMPublishPlugin.yml?label=actions&logo=github&branch=main)](https://github.com/brightdigit/NPMPublishPlugin/actions)
+[![Maintainability](https://qlty.sh/gh/brightdigit/projects/NPMPublishPlugin/maintainability.svg)](https://qlty.sh/gh/brightdigit/projects/NPMPublishPlugin)
 [![Codecov](https://img.shields.io/codecov/c/github/brightdigit/NPMPublishPlugin)](https://codecov.io/gh/brightdigit/NPMPublishPlugin)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/brightdigit/NPMPublishPlugin)](https://www.codefactor.io/repository/github/brightdigit/NPMPublishPlugin)
-[![codebeat badge](https://codebeat.co/badges/508ff110-90aa-4a3d-be48-1ffcc8009dd1)](https://codebeat.co/projects/github-com-brightdigit-npmpublishplugin-main)
-[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/brightdigit/NPMPublishPlugin)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
-[![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/brightdigit/NPMPublishPlugin?label=debt)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
-[![Code Climate issues](https://img.shields.io/codeclimate/issues/brightdigit/NPMPublishPlugin)](https://codeclimate.com/github/brightdigit/NPMPublishPlugin)
 
 # Table of Contents
 
